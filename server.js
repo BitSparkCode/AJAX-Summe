@@ -17,7 +17,9 @@ app.post('/sum', (req, res) => {
     }
 
     const sum = numbers.reduce((acc, num) => acc + num, 0);
-    res.json({ sum: sum });
+    setTimeout(() => {
+        res.json({ sum: sum });
+    }, 2000); // 2-sekündige Verzögerung
 });
 
 app.listen(port, () => {
