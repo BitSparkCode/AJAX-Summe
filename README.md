@@ -1,11 +1,11 @@
 # Summen berechnen mit AJAX
 Einfaches JS-Skript, welches ein JSON-Array mit mehreren Zahlen im Request Body entgegennimmt 
  
-Das Skript addiert diese Zahlen und gibt die Summe zurückgeben 
+Das Skript addiert diese Zahlen und gibt die Summe zurück.
  
 ## Dateien
 `index.html`: Die Hauptseite, welche das JavaScript einbindet und ausführt.
-`server.js`: Das JavaScript, das die Zahlen überprüft und addiert() (JS Server).
+`server.js`: Das JavaScript, das die Zahlen überprüft und addiert (JS Server).
 
 ## Nutzung
 
