@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summen Berechnen mit AJAX</title>
+    <script>
+        function calculateSum() {
+            const numbers = document.getElementById('numbers').value.split(',').map(Number);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/sum', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    document.getElementById('result').innerText = 'Sum: ' + response.sum;
+                }
+            };
+            xhr.send(JSON.stringify({ numbers: numbers }));
+        }
+    </script>
+</head>
+<body>
+    <h1>Summen Berechnen mit AJAX</h1>
+    <input type="text" id="numbers" placeholder="Nummern eingeben, (getrennt mit Kommas)">
+    <button onclick="calculateSum()">Berechnen</button>
+    <p id="result"></p>
+</body>
+</html>
