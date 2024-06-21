@@ -1,29 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summen Berechnen mit AJAX</title>
+    <title>Summenrechner</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script>
         function calculateSum() {
-            const numbers = document.getElementById('numbers').value.split(',').map(Number);
+            const numbers = [
+                Number(document.getElementById('number1').value),
+                Number(document.getElementById('number2').value),
+                Number(document.getElementById('number3').value),
+                Number(document.getElementById('number4').value)
+            ];
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/sum', true);
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
-                    document.getElementById('result').innerText = 'Sum: ' + response.sum;
+                    document.getElementById('result').innerText = 'Summe: ' + response.sum;
                 }
             };
             xhr.send(JSON.stringify({ numbers: numbers }));
         }
+
+        function resetFields() {
+            document.getElementById('number1').value = '';
+            document.getElementById('number2').value = '';
+            document.getElementById('number3').value = '';
+            document.getElementById('number4').value = '';
+            document.getElementById('result').innerText = '';
+        }
     </script>
 </head>
-<body>
-    <h1>Summen Berechnen mit AJAX</h1>
-    <input type="text" id="numbers" placeholder="Nummern eingeben, (getrennt mit Kommas)">
-    <button onclick="calculateSum()">Berechnen</button>
-    <p id="result"></p>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-xs">
+        <h1 class="text-2xl font-bold mb-4">Summenrechner</h1>
+        <div class="mb-4">
+            <input type="number" id="number1" class="w-full px-3 py-2 mb-2 border rounded" placeholder="Zahl 1 eingeben">
+            <input type="number" id="number2" class="w-full px-3 py-2 mb-2 border rounded" placeholder="Zahl 2 eingeben">
+            <input type="number" id="number3" class="w-full px-3 py-2 mb-2 border rounded" placeholder="Zahl 3 eingeben">
+            <input type="number" id="number4" class="w-full px-3 py-2 mb-2 border rounded" placeholder="Zahl 4 eingeben">
+        </div>
+        <button onclick="calculateSum()" class="bg-blue-500 text-white px-4 py-2 rounded">Berechnen</button>
+        <button onclick="resetFields()" class="bg-gray-500 text-white px-4 py-2 rounded ml-2">Zurücksetzen</button>
+        <p id="result" class="mt-4 text-lg font-semibold"></p>
+    </div>
 </body>
 </html>
